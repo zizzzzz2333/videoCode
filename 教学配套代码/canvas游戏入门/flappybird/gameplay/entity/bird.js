@@ -7,6 +7,9 @@ class Bird {
         this._ySpeedDelta = 0.7
         this.maxHeight = -30
         this._rotation = 0
+        this._maxRotation = 30
+        this._rotationDelta = 3
+        this._jumpRotation = -30
 
         this._moveUp = false
         this._addEvents()
@@ -32,13 +35,13 @@ class Bird {
     _jump() {
         if (this._moveUp) {
             this._ySpeed = this._jumpSpeed
-            this._rotation = -30
+            this._rotation = this._jumpRotation
         }
     }
 
     _updateRotation() {
-        if (this._rotation < 30) {
-            this._rotation += 3
+        if (this._rotation < this._maxRotation) {
+            this._rotation += this._rotationDelta
         }
     }
 
