@@ -5,7 +5,7 @@ class Bird {
         this._maxYSpeed = 15
         this._jumpSpeed = -7
         this._ySpeedDelta = 0.7
-        this.maxHeight = -30
+        this._maxHeight = -30
         this._rotation = 0
         this._maxRotation = 30
         this._rotationDelta = 3
@@ -61,8 +61,8 @@ class Bird {
     }
 
     _clampMaxHeight() {
-        if (this.gameObject.y < this.maxHeight) {
-            this.gameObject.y = this.maxHeight
+        if (this.gameObject.y < this._maxHeight) {
+            this.gameObject.y = this._maxHeight
         }
     }
 

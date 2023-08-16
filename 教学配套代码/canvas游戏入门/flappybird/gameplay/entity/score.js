@@ -1,24 +1,24 @@
 class Score {
     constructor(x, y, score, assetStore) {
         this._charWidth = 24
-        this.score = score
-        this.assetStore = assetStore
-        this.charList = this.setup(x, y, assetStore)
+        this._score = score
+        this._assetStore = assetStore
+        this._charList = this._setup(x, y, assetStore)
         this._initialX = x
     }
 
-    setup(x, y) {
+    _setup(x, y) {
         let charList = []
-        const img = this.assetStore.imageByName('0').img
+        const img = this._assetStore.imageByName('0').img
         const char = new GameObject(x, y, img)
         charList.push(char)
         return charList
     }
 
     _generateChar(char, margin) {
-        const img = this.assetStore.imageByName(`${char}`).img
+        const img = this._assetStore.imageByName(`${char}`).img
 
-        const firstChar = this.charList[0]
+        const firstChar = this._charList[0]
         const x = firstChar.x
         const y = firstChar.y
         return new GameObject(x + margin, y, img)
@@ -49,18 +49,18 @@ class Score {
         const offsetCount = (length - 1)
         const offsetUnit = this._charWidth / 2
         const offset = offsetCount * offsetUnit
-        this.charList[0].x = this._initialX - offset
+        this._charList[0].x = this._initialX - offset
     }
 
     updateChar(score) {
         const scoreStr = score.toString()
         this._adjustStrPosition(scoreStr)
-        this.charList = this._generateStr(scoreStr)
+        this._charList = this._generateStr(scoreStr)
     }
 
     addOnePoint() {
-        this.score += 1
-        this.updateChar(this.score)
+        this._score += 1
+        this.updateChar(this._score)
     }
 
     update() {
@@ -68,7 +68,7 @@ class Score {
     }
 
     render(ctx) {
-        this.charList.forEach((char) => {
+        this._charList.forEach((char) => {
             char.render(ctx)
         })
     }
