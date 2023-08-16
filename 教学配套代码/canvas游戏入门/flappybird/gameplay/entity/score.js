@@ -1,12 +1,10 @@
 class Score {
     constructor(x, y, score, assetStore) {
         this._charWidth = 24
-        this.charHeight = 36
         this.score = score
         this.assetStore = assetStore
         this.charList = this.setup(x, y, assetStore)
         this._initialX = x
-        this._initialY = y
     }
 
     setup(x, y) {
@@ -24,6 +22,21 @@ class Score {
         return new GameObject(x + margin, y, img)
     }
 
+    _generateStr(scoreStr) {
+        const charList = []
+        for (let i = 0; i < scoreStr.length; i++) {
+            const c = scoreStr[i]
+            const paddingForCharOne = 4
+            let margin = i * this._charWidth
+            if (c === '1') {
+                margin += paddingForCharOne
+            }
+            const char = this._generateChar(c, margin)
+            charList.push(char)
+        }
+        return charList
+    }
+
     _adjustStrPosition(scoreStr) {
         const length = scoreStr.length
         const offsetCount = (length - 1)
@@ -33,20 +46,9 @@ class Score {
     }
 
     updateChar(score) {
-        const charList = []
         const scoreStr = score.toString()
         this._adjustStrPosition(scoreStr)
-        for (let i = 0; i < scoreStr.length; i++) {
-            let c = scoreStr[i]
-            let margin = i * this._charWidth
-            let paddingForCharOne = 4
-            if (c === '1') {
-                margin = i * (this._charWidth + paddingForCharOne)
-            }
-            const char = this._generateChar(c, margin)
-            charList.push(char)
-        }
-        this.charList = charList
+        this.charList = this._generateStr(scoreStr)
     }
 
     addOnePoint() {
