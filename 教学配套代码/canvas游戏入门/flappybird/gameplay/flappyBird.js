@@ -22,6 +22,15 @@ const entry = async () => {
 
     const imgsList = [
         {name: '0', src: '../imgs/0.png'},
+        {name: '1', src: '../imgs/1.png'},
+        {name: '2', src: '../imgs/2.png'},
+        {name: '3', src: '../imgs/3.png'},
+        {name: '4', src: '../imgs/4.png'},
+        {name: '5', src: '../imgs/5.png'},
+        {name: '6', src: '../imgs/6.png'},
+        {name: '7', src: '../imgs/7.png'},
+        {name: '8', src: '../imgs/8.png'},
+        {name: '9', src: '../imgs/9.png'},
         {name: 'bg', src: '../imgs/bg.png'},
         {name: 'bird', src: '../imgs/b-01.png'},
         {name: 'ground', src: '../imgs/ground.png'},

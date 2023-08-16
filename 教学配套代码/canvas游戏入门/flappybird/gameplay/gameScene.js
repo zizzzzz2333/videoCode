@@ -21,9 +21,12 @@ class GameScene {
         const gameOverImg = this.assetStore.imageByName('gameover')
         this.gameOver = new GameOverMessage(50, 190, gameOverImg.img)
 
+        this.score = new Score(130, 50, 0, assetStore)
+
         this.container.addGameObject(this.background)
         this.container.addGameObject(this.ground)
         this.container.addGameObject(this.message)
+        this.container.addGameObject(this.score)
 
         this._addEvents()
     }
