@@ -11,8 +11,8 @@ class GameScene {
 
         const pipeImg = this.assetStore.imageByName('pipe')
         this.pipe = new Pipe(600, 0, pipeImg.img)
-        this.firstPipeIndex = 0
-        this.firstPipe = this.pipe.pipeList[this.firstPipeIndex]
+        this.nextPipeIndex = 0
+        this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
 
         const groundImg = this.assetStore.imageByName('ground')
         this.ground = new Ground(0, 440, groundImg.img)
@@ -75,17 +75,17 @@ class GameScene {
         }
     }
 
-    _reComputeFirstPipe() {
+    _reComputeNextPipe() {
         const pairPipeCount = 2
-        this.firstPipeIndex = (this.firstPipeIndex + pairPipeCount) % this.pipe.count
-        this.firstPipe = this.pipe.pipeList[this.firstPipeIndex]
+        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.pipe.count
+        this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
     }
 
     _increaseScore() {
-        const scoreBar = this.firstPipe.x + this.firstPipe.w
+        const scoreBar = this.nextPipe.x + this.nextPipe.w
         if (this.bird.gameObject.x > scoreBar) {
             this.score.addOnePoint()
-            this._reComputeFirstPipe()
+            this._reComputeNextPipe()
         }
     }
 
