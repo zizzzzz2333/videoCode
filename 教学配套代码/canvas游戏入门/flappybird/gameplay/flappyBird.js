@@ -27,6 +27,7 @@ const entry = async () => {
         {name: 'ground', src: '../imgs/ground.png'},
         {name: 'pipe', src: '../imgs/pipe.png'},
         {name: 'message', src: '../imgs/message.png'},
+        {name: 'gameover', src: '../imgs/gameover.png'},
     ]
     const imgs = await loadImages(imgsList.map(img => img.src))
     const imgNames = imgsList.map(img => img.name)

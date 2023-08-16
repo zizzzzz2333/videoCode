@@ -18,6 +18,9 @@ class GameScene {
         const messageImg = this.assetStore.imageByName('message')
         this.message = new StartMessage(50, 100, messageImg.img)
 
+        const gameOverImg = this.assetStore.imageByName('gameover')
+        this.gameOver = new GameOverMessage(50, 190, gameOverImg.img)
+
         this.container.addGameObject(this.background)
         this.container.addGameObject(this.ground)
         this.container.addGameObject(this.message)
@@ -51,6 +54,7 @@ class GameScene {
         this.bird.fall()
         this.ground.stop()
         this.pipe.stop()
+        this.container.addGameObject(this.gameOver)
     }
 
     _birdHitGround() {
