@@ -5,6 +5,7 @@ class Bird {
         this._maxYSpeed = 15
         this._jumpSpeed = -7
         this._ySpeedDelta = 0.7
+        this.maxHeight = -30
 
         this._moveUp = false
         this._addEvents()
@@ -40,6 +41,9 @@ class Bird {
         this.gameObject.y += this._ySpeed
         if (this.gameObject.y > groundHeight) {
             this.gameObject.y = groundHeight
+        }
+        if (this.gameObject.y < this.maxHeight) {
+            this.gameObject.y = this.maxHeight
         }
     }
 
