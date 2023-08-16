@@ -11,6 +11,8 @@ class GameScene {
 
         const pipeImg = this.assetStore.imageByName('pipe')
         this.pipe = new Pipe(600, 0, pipeImg.img)
+        this.firstPipeIndex = 0
+        this.firstPipe = this.pipe.pipeList[this.firstPipeIndex]
 
         const groundImg = this.assetStore.imageByName('ground')
         this.ground = new Ground(0, 440, groundImg.img)
@@ -26,13 +28,13 @@ class GameScene {
         this.container.addGameObject(this.background)
         this.container.addGameObject(this.ground)
         this.container.addGameObject(this.message)
-        this.container.addGameObject(this.score)
 
         this._addEvents()
     }
 
     _start() {
         this.container.addGameObjectBefore(this.pipe, this.ground)
+        this.container.addGameObject(this.score)
         this.container.addGameObject(this.bird)
         this.container.removeGameObject(this.message)
 
@@ -73,11 +75,25 @@ class GameScene {
         }
     }
 
+    _reComputeFirstPipe() {
+        const pairPipeCount = 2
+        this.firstPipeIndex = (this.firstPipeIndex + pairPipeCount) % this.pipe.count
+        this.firstPipe = this.pipe.pipeList[this.firstPipeIndex]
+    }
+
+    _increaseScore() {
+        const scoreBar = this.firstPipe.x + this.firstPipe.w
+        if (this.bird.gameObject.x > scoreBar) {
+            this.score.addOnePoint()
+            this._reComputeFirstPipe()
+        }
+    }
+
     update() {
         this.container.update()
         this._birdHitGround()
         this._birdHitPipe()
-
+        this._increaseScore()
     }
 
     render(ctx) {

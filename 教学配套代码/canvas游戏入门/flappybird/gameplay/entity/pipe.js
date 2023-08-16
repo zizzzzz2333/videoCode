@@ -16,6 +16,10 @@ class Pipe {
         return pipeList
     }
 
+    get count() {
+        return this.pipeList.length
+    }
+
     _generatePairPipe(x, img) {
         const randomHeight = [250, 300, 320, 350, 400]
         const pipeHeight = randomHeight[getRandomInt(0, 4)]

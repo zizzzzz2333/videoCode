@@ -64,7 +64,7 @@ class Score {
     }
 
     update() {
-        this.addOnePoint()
+
     }
 
     render(ctx) {
