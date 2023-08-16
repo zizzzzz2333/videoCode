@@ -7,7 +7,7 @@ class GameScene {
         this.background = new Background(0, 0, bgImg.img)
 
         const birdImg = this.assetStore.imageByName('bird')
-        this.bird = new Bird(100, 100, birdImg.img)
+        this.bird = new Bird(100, 50, birdImg.img)
 
         const pipeImg = this.assetStore.imageByName('pipe')
         this.pipe = new Pipe(600, 0, pipeImg.img)

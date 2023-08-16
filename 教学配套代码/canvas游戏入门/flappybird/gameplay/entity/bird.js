@@ -44,6 +44,7 @@ class Bird {
     }
 
     fall() {
+        this._moveUp = false
         document.removeEventListener('keydown', this._keydownEventsHandler)
         document.removeEventListener('keyup', this._keyupEventsHandler)
     }
