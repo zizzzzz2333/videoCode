@@ -3,6 +3,8 @@ class GameObject {
         this.x = x
         this.y = y
         this.img = img
+        this.w = img.width
+        this.h = img.height
     }
 
     render(ctx, flipY = false) {

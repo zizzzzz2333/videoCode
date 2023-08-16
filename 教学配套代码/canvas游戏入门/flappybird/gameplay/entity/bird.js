@@ -10,18 +10,21 @@ class Bird {
         this._addEvents()
     }
 
-    _addEvents() {
-        document.addEventListener('keydown', (event) => {
-            if(event.key === 'j')  {
-                this._moveUp = true
-            }
-        })
+    _keydownEventsHandler = (event) => {
+        if(event.key === 'j')  {
+            this._moveUp = true
+        }
+    }
 
-        document.addEventListener('keyup', (event) => {
-            if(event.key === 'j')  {
-                this._moveUp = false
-            }
-        })
+    _keyupEventsHandler = (event) => {
+        if(event.key === 'j')  {
+            this._moveUp = false
+        }
+    }
+
+    _addEvents() {
+        document.addEventListener('keydown', this._keydownEventsHandler)
+        document.addEventListener('keyup', this._keyupEventsHandler)
     }
 
     _updateYSpeed() {
@@ -38,6 +41,11 @@ class Bird {
         if (this.gameObject.y > groundHeight) {
             this.gameObject.y = groundHeight
         }
+    }
+
+    fall() {
+        document.removeEventListener('keydown', this._keydownEventsHandler)
+        document.removeEventListener('keyup', this._keyupEventsHandler)
     }
 
     update() {

@@ -28,6 +28,10 @@ class Ground {
         }
     }
 
+    stop() {
+        this._groundSpeed = 0
+    }
+
     update() {
         this._moveBackward()
         this._addGround()

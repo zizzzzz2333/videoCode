@@ -2,7 +2,7 @@ class Pipe {
     constructor(x, y, img) {
         this._pipeWidth = img.width
         this._pipeSpeed = 3
-        this._pipeList = this._setup(x, y, img)
+        this.pipeList = this._setup(x, y, img)
     }
 
     _setup(x, y, img) {
@@ -28,7 +28,7 @@ class Pipe {
     _moveForward() {
         const margin = this._pipeWidth * 4
         const pairPipeNum = 4
-        this._pipeList.forEach((gameObject) => {
+        this.pipeList.forEach((gameObject) => {
             if (gameObject.x <= -this._pipeWidth) {
                 gameObject.x += margin * pairPipeNum
             }
@@ -36,7 +36,11 @@ class Pipe {
     }
 
     _moveBackward() {
-        this._pipeList.forEach((gameObject) => {gameObject.x -= this._pipeSpeed})
+        this.pipeList.forEach((gameObject) => {gameObject.x -= this._pipeSpeed})
+    }
+
+    stop() {
+        this._pipeSpeed = 0
     }
 
     update() {
@@ -45,7 +49,7 @@ class Pipe {
     }
 
     render(ctx) {
-        this._pipeList.forEach((gameObject, index) => {
+        this.pipeList.forEach((gameObject, index) => {
             if (index % 2 !== 0) {
                 gameObject.render(ctx, true)
             } else {

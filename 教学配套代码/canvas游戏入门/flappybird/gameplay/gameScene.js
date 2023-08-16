@@ -16,13 +16,34 @@ class GameScene {
         this.ground = new Ground(0, 440, groundImg.img)
 
         this.container.addGameObject(this.background)
-        this.container.addGameObject(this.bird)
         this.container.addGameObject(this.pipe)
         this.container.addGameObject(this.ground)
+        this.container.addGameObject(this.bird)
+    }
+
+    _stopAll() {
+        this.bird.fall()
+        this.ground.stop()
+        this.pipe.stop()
+    }
+
+    _birdHitGround() {
+        const groundHeight = 415
+        if (this.bird.gameObject.y >= groundHeight) {
+            this._stopAll()
+        }
+    }
+
+    _birdHitPipe() {
+        if (hit(this.bird.gameObject, this.pipe.pipeList)) {
+            this._stopAll()
+        }
     }
 
     update() {
         this.container.update()
+        this._birdHitGround()
+        this._birdHitPipe()
     }
 
     render(ctx) {
