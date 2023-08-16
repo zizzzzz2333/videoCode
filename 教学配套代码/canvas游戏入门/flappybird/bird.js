@@ -1,39 +1,39 @@
 class Bird {
     constructor(x, y, img, xSpeed) {
         this.gameObject = new GameObject(x, y, img)
-        this.xSpeed = xSpeed
+        this._xSpeed = xSpeed
 
-        this.moveRight = false
-        this.moveLeft = false
-        this.addEvents()
+        this._moveRight = false
+        this._moveLeft = false
+        this._addEvents()
     }
 
-    addEvents() {
+    _addEvents() {
         document.addEventListener('keydown', (event) => {
             if(event.key === 'd')  {
-                this.moveRight = true
+                this._moveRight = true
             }
             if(event.key === 'a')  {
-                this.moveLeft = true
+                this._moveLeft = true
             }
         })
 
         document.addEventListener('keyup', (event) => {
             if(event.key === 'd')  {
-                this.moveRight = false
+                this._moveRight = false
             }
             if(event.key === 'a')  {
-                this.moveLeft = false
+                this._moveLeft = false
             }
         })
     }
 
     update() {
-        if (this.moveRight) {
-            this.gameObject.x += this.xSpeed
+        if (this._moveRight) {
+            this.gameObject.x += this._xSpeed
         }
-        if (this.moveLeft) {
-            this.gameObject.x -= this.xSpeed
+        if (this._moveLeft) {
+            this.gameObject.x -= this._xSpeed
         }
     }
 

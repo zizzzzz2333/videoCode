@@ -2,18 +2,18 @@ class Game {
     constructor(canvas, gameObjects, assetStore) {
         this.canvas = canvas
         this.ctx = this.canvas.getContext("2d");
-        this.gameObjects = gameObjects
+        this._gameObjects = gameObjects
         this.assetStore = assetStore
     }
 
     update() {
-        this.gameObjects.forEach((gameObject) => {
+        this._gameObjects.forEach((gameObject) => {
             gameObject.update()
         })
     }
 
     render() {
-        this.gameObjects.forEach((gameObject) => {
+        this._gameObjects.forEach((gameObject) => {
             gameObject.render(this.ctx)
         })
     }
