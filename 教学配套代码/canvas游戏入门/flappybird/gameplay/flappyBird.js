@@ -30,21 +30,9 @@ const entry = async () => {
     const imgs = await loadImages(imgsList.map(img => img.src))
     const imgNames = imgsList.map(img => img.name)
     const assetStore = new AssetStore(imgs, imgNames)
+    const scene = new GameScene([], assetStore)
 
-    const bgImg = assetStore.imageByName('bg')
-    const background = new Background(0, 0, bgImg.img)
-
-    const birdImg = assetStore.imageByName('bird')
-    const bird = new Bird(100, 100, birdImg.img)
-
-    const pipeImg = assetStore.imageByName('pipe')
-    const pipe = new Pipe(600, 0, pipeImg.img)
-
-    const groundImg = assetStore.imageByName('ground')
-    const ground = new Ground(0, 440, groundImg.img)
-
-    const gameObjects = [background, pipe, ground, bird]
-    const game = new Game(canvas, gameObjects, assetStore)
+    const game = new Game(canvas, scene)
 
     game.runLoop()
 }

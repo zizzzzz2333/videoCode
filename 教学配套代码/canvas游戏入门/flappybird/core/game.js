@@ -1,26 +1,21 @@
 class Game {
-    constructor(canvas, gameObjects, assetStore) {
+    constructor(canvas, scene) {
         this.canvas = canvas
         this.ctx = this.canvas.getContext("2d");
-        this._gameObjects = gameObjects
-        this.assetStore = assetStore
+        this.scene = scene
     }
 
     update() {
-        this._gameObjects.forEach((gameObject) => {
-            gameObject.update()
-        })
+        this.scene.update()
     }
 
     render() {
-        this._gameObjects.forEach((gameObject) => {
-            gameObject.render(this.ctx)
-        })
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.scene.render(this.ctx)
     }
 
     runLoop() {
         this.update()
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.render()
         requestAnimationFrame(this.runLoop.bind(this))
     }
