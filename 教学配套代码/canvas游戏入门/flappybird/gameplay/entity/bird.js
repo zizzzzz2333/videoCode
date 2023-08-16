@@ -6,6 +6,7 @@ class Bird {
         this._jumpSpeed = -7
         this._ySpeedDelta = 0.7
         this.maxHeight = -30
+        this._rotation = 0
 
         this._moveUp = false
         this._addEvents()
@@ -31,10 +32,15 @@ class Bird {
     _updateYSpeed() {
         if (this._moveUp) {
             this._ySpeed = this._jumpSpeed
+            this._rotation = -30
         }
 
         if (this._ySpeed < this._maxYSpeed) {
             this._ySpeed += this._ySpeedDelta
+        }
+
+        if (this._rotation < 30) {
+            this._rotation += 3
         }
 
         const groundHeight = 416
@@ -58,6 +64,6 @@ class Bird {
     }
 
     render(ctx) {
-        this.gameObject.render(ctx)
+        this.gameObject.render(ctx, false, this._rotation)
     }
 }
