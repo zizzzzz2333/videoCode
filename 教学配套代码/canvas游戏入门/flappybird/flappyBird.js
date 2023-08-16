@@ -35,10 +35,10 @@ const entry = async () => {
     const background = new Background(0, 0, bgImg.img)
 
     const birdImg = assetStore.imageByName('bird')
-    const bird = new Bird(100, 100, birdImg.img, 3)
+    const bird = new Bird(100, 100, birdImg.img)
 
     const pipeImg = assetStore.imageByName('pipe')
-    const pipe = new Pipe(0, 0, pipeImg.img)
+    const pipe = new Pipe(600, 0, pipeImg.img)
 
     const groundImg = assetStore.imageByName('ground')
     const ground = new Ground(0, 440, groundImg.img)
