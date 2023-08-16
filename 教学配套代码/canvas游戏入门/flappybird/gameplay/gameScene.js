@@ -28,7 +28,7 @@ class GameScene {
     }
 
     _birdHitGround() {
-        const groundHeight = 415
+        const groundHeight = 416
         if (this.bird.gameObject.y >= groundHeight) {
             this._stopAll()
         }

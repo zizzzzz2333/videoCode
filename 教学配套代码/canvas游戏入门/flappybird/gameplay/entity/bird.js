@@ -37,7 +37,7 @@ class Bird {
             this._ySpeed += this._ySpeedDelta
         }
 
-        const groundHeight = 415
+        const groundHeight = 416
         this.gameObject.y += this._ySpeed
         if (this.gameObject.y > groundHeight) {
             this.gameObject.y = groundHeight

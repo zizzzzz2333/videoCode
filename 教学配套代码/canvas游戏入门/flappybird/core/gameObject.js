@@ -11,8 +11,8 @@ class GameObject {
         if (flipY) {
             ctx.save()
 
-            let w2 = this.img.width / 2
-            let h2 = this.img.height / 2
+            let w2 = this.w / 2
+            let h2 = this.h / 2
             ctx.translate(this.x + w2, this.y + h2)
             ctx.scale(1, -1)
             ctx.translate(-w2, -h2)
