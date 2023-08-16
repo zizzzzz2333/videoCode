@@ -15,10 +15,36 @@ class GameScene {
         const groundImg = this.assetStore.imageByName('ground')
         this.ground = new Ground(0, 440, groundImg.img)
 
+        const messageImg = this.assetStore.imageByName('message')
+        this.message = new StartMessage(50, 100, messageImg.img)
+
         this.container.addGameObject(this.background)
-        this.container.addGameObject(this.pipe)
         this.container.addGameObject(this.ground)
+        this.container.addGameObject(this.message)
+
+        this._addEvents()
+    }
+
+    _start() {
+        this.container.addGameObjectBefore(this.pipe, this.ground)
         this.container.addGameObject(this.bird)
+        this.container.removeGameObject(this.message)
+
+        this._removeEvents()
+    }
+
+    _keydownEventsHandler = (event) => {
+        if(event.key === 'j')  {
+            this._start()
+        }
+    }
+
+    _removeEvents() {
+        document.removeEventListener('keydown', this._keydownEventsHandler)
+    }
+
+    _addEvents() {
+        document.addEventListener('keydown', this._keydownEventsHandler)
     }
 
     _stopAll() {
@@ -44,6 +70,7 @@ class GameScene {
         this.container.update()
         this._birdHitGround()
         this._birdHitPipe()
+
     }
 
     render(ctx) {
