@@ -29,25 +29,35 @@ class Bird {
         document.addEventListener('keyup', this._keyupEventsHandler)
     }
 
-    _updateYSpeed() {
+    _jump() {
         if (this._moveUp) {
             this._ySpeed = this._jumpSpeed
             this._rotation = -30
         }
+    }
 
-        if (this._ySpeed < this._maxYSpeed) {
-            this._ySpeed += this._ySpeedDelta
-        }
-
+    _updateRotation() {
         if (this._rotation < 30) {
             this._rotation += 3
         }
+    }
 
+    _updateYSpeed() {
+        if (this._ySpeed < this._maxYSpeed) {
+            this._ySpeed += this._ySpeedDelta
+        }
+    }
+
+    _checkOnGround() {
         const groundHeight = 416
         this.gameObject.y += this._ySpeed
         if (this.gameObject.y > groundHeight) {
             this.gameObject.y = groundHeight
+            this._rotation = 0
         }
+    }
+
+    _clampMaxHeight() {
         if (this.gameObject.y < this.maxHeight) {
             this.gameObject.y = this.maxHeight
         }
@@ -60,7 +70,11 @@ class Bird {
     }
 
     update() {
+        this._jump()
         this._updateYSpeed()
+        this._updateRotation()
+        this._checkOnGround()
+        this._clampMaxHeight()
     }
 
     render(ctx) {
