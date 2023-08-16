@@ -35,7 +35,7 @@ const entry = async () => {
     const background = new Background(0, 0, bgImg.img)
 
     const birdImg = assetStore.imageByName('bird')
-    const bird = new Bird(100, 260, birdImg.img, 3)
+    const bird = new Bird(100, 100, birdImg.img, 3)
 
     const pipeImg = assetStore.imageByName('pipe')
     const pipe = new Pipe(0, 0, pipeImg.img)
@@ -43,7 +43,7 @@ const entry = async () => {
     const groundImg = assetStore.imageByName('ground')
     const ground = new Ground(0, 440, groundImg.img)
 
-    const gameObjects = [background, bird, pipe, ground]
+    const gameObjects = [background, pipe, ground, bird]
     const game = new Game(canvas, gameObjects, assetStore)
 
     game.runLoop()
