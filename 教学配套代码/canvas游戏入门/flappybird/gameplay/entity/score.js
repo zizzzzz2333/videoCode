@@ -22,15 +22,20 @@ class Score {
         return new GameObject(x + margin, y, img)
     }
 
+    _adjustMarginForCharOne(char, margin) {
+        const paddingForCharOne = 4
+        if (char === '1') {
+            margin += paddingForCharOne
+        }
+        return margin
+    }
+
     _generateStr(scoreStr) {
         const charList = []
         for (let i = 0; i < scoreStr.length; i++) {
             const c = scoreStr[i]
-            const paddingForCharOne = 4
             let margin = i * this._charWidth
-            if (c === '1') {
-                margin += paddingForCharOne
-            }
+            margin = this._adjustMarginForCharOne(c, margin)
             const char = this._generateChar(c, margin)
             charList.push(char)
         }
