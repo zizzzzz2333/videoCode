@@ -17,8 +17,10 @@ class Score {
 
     _generateChar(char, margin) {
         const img = this.assetStore.imageByName(`${char}`).img
-        const x = this.charList[0].x
-        const y = this.charList[0].y
+
+        const firstChar = this.charList[0]
+        const x = firstChar.x
+        const y = firstChar.y
         return new GameObject(x + margin, y, img)
     }
 
