@@ -15,7 +15,7 @@ class Score {
         return charList
     }
 
-    _generateChar(char, margin) {
+    _getCharBasedOnFirstCharPosition(char, margin) {
         const img = this._assetStore.imageByName(`${char}`).img
 
         const firstChar = this._charList[0]
@@ -38,23 +38,27 @@ class Score {
             const c = scoreStr[i]
             let margin = i * this._charWidth
             margin = this._adjustMarginForCharOne(c, margin)
-            const char = this._generateChar(c, margin)
+            const char = this._getCharBasedOnFirstCharPosition(c, margin)
             charList.push(char)
         }
         return charList
     }
 
-    _adjustStrPosition(scoreStr) {
+    _firstCharMoveLeft(offset) {
+        this._charList[0].x = this._initialX - offset
+    }
+
+    _adjustFirstCharPosition(scoreStr) {
         const length = scoreStr.length
         const offsetCount = (length - 1)
         const offsetUnit = this._charWidth / 2
         const offset = offsetCount * offsetUnit
-        this._charList[0].x = this._initialX - offset
+        this._firstCharMoveLeft(offset)
     }
 
     updateChar(score) {
         const scoreStr = score.toString()
-        this._adjustStrPosition(scoreStr)
+        this._adjustFirstCharPosition(scoreStr)
         this._charList = this._generateStr(scoreStr)
     }
 
