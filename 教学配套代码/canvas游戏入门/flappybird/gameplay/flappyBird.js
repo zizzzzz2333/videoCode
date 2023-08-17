@@ -18,6 +18,7 @@ const entry = async () => {
     const canvas = document.getElementById("id-canvas");
     if (!canvas.getContext) {
         console.log('浏览器不支持canvas')
+        return
     }
 
     const imgsList = [
