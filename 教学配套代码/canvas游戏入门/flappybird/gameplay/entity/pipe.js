@@ -29,8 +29,8 @@ class Pipe {
         return [pipe, upPipe]
     }
 
-    _moveToLast(gameObject, offset) {
-        gameObject.x += offset
+    _movePipeToLast(pipe, offset) {
+        pipe.x += offset
     }
 
     _moveForward() {
@@ -40,7 +40,7 @@ class Pipe {
         this.pipeList.forEach((pipe) => {
             const pipePassedLeftBorder = pipe.x <= -this._pipeWidth
             if (pipePassedLeftBorder) {
-                this._moveToLast(pipe, offset)
+                this._movePipeToLast(pipe, offset)
             }
         })
     }
