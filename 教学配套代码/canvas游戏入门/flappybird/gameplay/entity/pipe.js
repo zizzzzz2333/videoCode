@@ -8,8 +8,8 @@ class Pipe {
     _setup(x, y, img) {
         let pipeList = []
         const pipeNum = 4
+        const margin = this._pipeWidth * 4
         for (let i = 0; i < pipeNum; i++) {
-            const margin = this._pipeWidth * 4
             const pipes = this._generatePairPipe(x + i * margin, img)
             pipeList = pipeList.concat(pipes)
         }

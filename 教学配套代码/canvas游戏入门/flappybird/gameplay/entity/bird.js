@@ -54,14 +54,16 @@ class Bird {
     _checkOnGround() {
         const groundHeight = 416
         this.gameObject.y += this._ySpeed
-        if (this.gameObject.y > groundHeight) {
+        const birdOnGround = this.gameObject.y > groundHeight
+        if (birdOnGround) {
             this.gameObject.y = groundHeight
             this._rotation = 0
         }
     }
 
     _clampMaxHeight() {
-        if (this.gameObject.y < this._maxHeight) {
+        const birdOverMaxHeight = this.gameObject.y < this._maxHeight
+        if (birdOverMaxHeight) {
             this.gameObject.y = this._maxHeight
         }
     }
