@@ -83,7 +83,8 @@ class GameScene {
 
     _increaseScore() {
         const scoreBar = this.nextPipe.x + this.nextPipe.w
-        if (this.bird.gameObject.x > scoreBar) {
+        const birdCrossedPipe = this.bird.gameObject.x > scoreBar
+        if (birdCrossedPipe) {
             this.score.addOnePoint()
             this._reComputeNextPipe()
         }

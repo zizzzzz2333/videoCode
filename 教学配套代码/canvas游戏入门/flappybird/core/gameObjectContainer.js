@@ -9,14 +9,16 @@ class GameObjectContainer {
 
     addGameObjectBefore(gameObject, before) {
         const index = this._gameObjects.indexOf(before)
-        if (index > -1) {
+        const hasBefore = index > -1
+        if (hasBefore) {
             this._gameObjects.splice(index, 0, gameObject)
         }
     }
 
     removeGameObject(gameObject) {
         const index = this._gameObjects.indexOf(gameObject)
-        if (index > -1) {
+        const hasBefore = index > -1
+        if (hasBefore) {
             this._gameObjects.splice(index, 1)
         }
     }

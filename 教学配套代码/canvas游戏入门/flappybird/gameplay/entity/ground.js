@@ -20,7 +20,8 @@ class Ground {
     }
 
     _addGround() {
-        if (this._groundList[0].x <= -this._groundWidth) {
+        const firstGroundPassedLeftBorder = this._groundList[0].x <= -this._groundWidth
+        if (firstGroundPassedLeftBorder) {
             this._groundList.shift()
             const lastGround = this._groundList[this._groundList.length - 1]
             const ground = new GameObject(lastGround.x + this._groundWidth, lastGround.y, lastGround.img)
