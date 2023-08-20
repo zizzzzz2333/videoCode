@@ -1,13 +1,16 @@
 class Background {
-    constructor(x, y, img) {
-        this.gameObject = new GameObject(x, y, img)
+    constructor(gameObject, renderer) {
+        this.gameObject = gameObject
+        this.renderer = renderer
+
+        log('background', this.gameObject, this.renderer)
     }
 
     update() {
 
     }
 
-    render(ctx) {
-        this.gameObject.render(ctx)
+    render() {
+        this.renderer.render(this.gameObject)
     }
 }

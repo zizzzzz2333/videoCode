@@ -42,7 +42,9 @@ const entry = async () => {
     const imgs = await loadImages(imgsList.map(img => img.src))
     const imgNames = imgsList.map(img => img.name)
     const assetStore = new AssetStore(imgs, imgNames)
-    const scene = new GameScene([], assetStore)
+
+    const ctx = canvas.getContext("2d");
+    const scene = new GameScene([], assetStore, ctx)
 
     const game = new Game(canvas, scene)
 

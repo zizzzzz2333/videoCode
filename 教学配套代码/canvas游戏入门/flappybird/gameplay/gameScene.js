@@ -1,10 +1,10 @@
 class GameScene {
-    constructor(gameObjects, assetStore) {
+    constructor(gameObjects, assetStore, ctx) {
         this.container = new GameObjectContainer(gameObjects)
         this.assetStore = assetStore
+        this.ctx = ctx
 
-        const bgImg = this.assetStore.imageByName('bg')
-        this.background = new Background(0, 0, bgImg.img)
+        this._createBackground()
 
         const birdImg = this.assetStore.imageByName('bird')
         this.bird = new Bird(100, 50, birdImg.img)
@@ -30,6 +30,14 @@ class GameScene {
         this.container.addGameObject(this.message)
 
         this._addEvents()
+    }
+
+    _createBackground() {
+        const bgImg = this.assetStore.imageByName('bg')
+        const bgPosition = new Position(0, 0)
+        const bgGameObject = new GameObjectNew(bgPosition, bgImg.img)
+        const bgRenderer = new PlainRenderer(this.ctx)
+        this.background = new Background(bgGameObject, bgRenderer)
     }
 
     _start() {
