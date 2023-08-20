@@ -35,9 +35,9 @@ class GameScene {
     _createBackground() {
         const bgImg = this.assetStore.imageByName('bg')
         const bgPosition = new Position(0, 0)
-        const bgGameObject = new GameObjectNew(bgPosition, bgImg.img)
-        const bgRenderer = new PlainRenderer(this.ctx)
-        this.background = new Background(bgGameObject, bgRenderer)
+        const gameObject = new GameObjectNew(bgPosition, bgImg.img)
+        const renderer = new PlainRenderer(this.ctx)
+        this.background = new Background(gameObject, renderer)
     }
 
     _start() {
