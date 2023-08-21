@@ -14,8 +14,7 @@ class GameScene {
         this._createGrounds()
         this._createStartMessage()
         this._createGameOver()
-
-        this.score = new Score(130, 50, 0, assetStore)
+        this._createScore()
 
         this.container.addGameObject(this.background)
         this.container.addGameObject(this.grounds)
@@ -64,6 +63,10 @@ class GameScene {
         const gameOverPosition = new Position(50, 190)
         const gameObject = new GameObjectNew(gameOverPosition, gameOverImg.img)
         this.gameOver = new GameOverMessage(gameObject, this.plainRenderer)
+    }
+
+    _createScore() {
+        this.score = new Score(130, 50, 0, this.assetStore, this.plainRenderer)
     }
 
     _start() {
@@ -116,7 +119,7 @@ class GameScene {
     }
 
     _increaseScore() {
-        const scoreBar = this.nextPipe.x + this.nextPipe.w
+        const scoreBar = this.nextPipe.x + this.nextPipe.width
         const birdCrossedPipe = this.bird.gameObject.x > scoreBar
         if (birdCrossedPipe) {
             this.score.addOnePoint()
