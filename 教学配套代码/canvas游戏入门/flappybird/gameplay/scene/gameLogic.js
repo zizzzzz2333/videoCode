@@ -2,9 +2,12 @@ class GameLogic {
     constructor(entityGroup, container) {
         this.entityGroup = entityGroup
         this.container = container
+
+        this._addEntitiesToContainer()
+        this._addEvents()
     }
 
-    addEntitiesToContainer() {
+    _addEntitiesToContainer() {
         this.container.addGameObjects([
             this.entityGroup.background,
             this.entityGroup.grounds,
@@ -12,7 +15,7 @@ class GameLogic {
         ])
     }
 
-    addEvents() {
+    _addEvents() {
         document.addEventListener('keydown', this._keydownEventsHandler)
     }
 
