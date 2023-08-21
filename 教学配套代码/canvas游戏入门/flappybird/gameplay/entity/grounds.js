@@ -44,7 +44,7 @@ class Grounds {
         this._groundSpeed = 0
     }
 
-    render(ctx) {
+    render() {
         this._groundList.forEach((gameObject) => {this._renderer.render(gameObject)})
     }
 }

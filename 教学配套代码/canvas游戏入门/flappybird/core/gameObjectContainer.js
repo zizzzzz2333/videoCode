@@ -33,9 +33,9 @@ class GameObjectContainer {
         })
     }
 
-    render(ctx) {
+    render() {
         this._gameObjects.forEach((gameObject) => {
-            gameObject.render(ctx)
+            gameObject.render()
         })
     }
 }
