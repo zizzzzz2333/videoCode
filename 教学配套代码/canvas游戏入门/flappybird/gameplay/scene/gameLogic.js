@@ -54,24 +54,28 @@ class GameLogic {
     }
 
     _birdHitPipe() {
-        if (hit(this.entityGroup.bird.gameObject, this.entityGroup.pipes.pipeList)) {
+        const bird = this.entityGroup.bird.gameObject
+        const pipes = this.entityGroup.pipes.pipeList
+        if (hit(bird, pipes)) {
             this._stopAll()
         }
     }
 
     _stopAll() {
-        this.entityGroup.bird.fall()
-        this.entityGroup.grounds.stop()
-        this.entityGroup.pipes.stop()
-        this.container.addGameObject(this.entityGroup.gameOver)
+        const group = this.entityGroup
+        group.bird.fall()
+        group.grounds.stop()
+        group.pipes.stop()
+        this.container.addGameObject(group.gameOver)
     }
 
     _increaseScore() {
-        const scoreBar = this.entityGroup.pipes.scoreBar
-        const birdCrossedPipe = this.entityGroup.bird.gameObject.x > scoreBar
+        const group = this.entityGroup
+        const scoreBar = group.pipes.scoreBar
+        const birdCrossedPipe = group.bird.gameObject.x > scoreBar
         if (birdCrossedPipe) {
-            this.entityGroup.score.addOnePoint()
-            this.entityGroup.pipes.reComputeNextPipe()
+            group.score.addOnePoint()
+            group.pipes.reComputeNextPipe()
         }
     }
 
