@@ -11,9 +11,10 @@ class GameScene {
         this._createBackground()
         this._createBird()
         this._createPipe()
+        this._createGround()
 
-        const groundImg = this.assetStore.imageByName('ground')
-        this.ground = new Ground(0, 440, groundImg.img)
+        // const groundImg = this.assetStore.imageByName('ground')
+        // this.ground = new Ground(0, 440, groundImg.img)
 
         this._createStartMessage()
         this._createGameOver()
@@ -48,6 +49,11 @@ class GameScene {
 
         this.nextPipeIndex = 0
         this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
+    }
+
+    _createGround() {
+        const groundImg = this.assetStore.imageByName('ground')
+        this.ground = new Ground(0, 440, groundImg.img, this.plainRenderer)
     }
 
     _createStartMessage() {
