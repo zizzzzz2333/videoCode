@@ -43,12 +43,16 @@ class Score {
         const charList = []
         for (let i = 0; i < scoreStr.length; i++) {
             const c = scoreStr[i]
-            let margin = i * this._charWidth
-            margin = this._adjustMarginForCharOne(c, margin)
+            const margin = this._generateMarginBasedOnIndex(c, i)
             const char = this._getCharBasedOnFirstCharPosition(c, margin)
             charList.push(char)
         }
         return charList
+    }
+
+    _generateMarginBasedOnIndex(char, index) {
+        let margin = index * this._charWidth
+        return this._adjustMarginForCharOne(char, margin)
     }
 
     _adjustMarginForCharOne(char, margin) {
