@@ -35,14 +35,14 @@ class Bird {
     }
 
     update() {
-        this._mayBeJump()
+        this._maybeJump()
         this._updateYSpeed()
         this._updateRotation()
         this._checkOnGround()
         this._clampMaxHeight()
     }
 
-    _mayBeJump() {
+    _maybeJump() {
         if (this._moveUp) {
             this._ySpeed = this._jumpSpeed
             this._rotation = this._jumpRotation
