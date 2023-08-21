@@ -37,12 +37,22 @@ class EntityGroup {
 
     _createPipes() {
         const pipeImg = this.assetStore.imageByName('pipe')
-        this.pipes = new Pipes(600, 0, pipeImg.img, this.rendererGroup.mixFlipYAndPlainRenderer)
+        this.pipes = new Pipes(
+            600,
+            0,
+            pipeImg.img,
+            this.rendererGroup.mixFlipYAndPlainRenderer,
+        )
     }
 
     _createGrounds() {
         const groundImg = this.assetStore.imageByName('ground')
-        this.grounds = new Grounds(0, 440, groundImg.img, this.rendererGroup.plainRenderer)
+        this.grounds = new Grounds(
+            0,
+            440,
+            groundImg.img,
+            this.rendererGroup.plainRenderer,
+        )
     }
 
     _createStartMessage() {
@@ -66,6 +76,12 @@ class EntityGroup {
     }
 
     _createScore() {
-        this.score = new Score(130, 50, 0, this.assetStore, this.rendererGroup.plainRenderer)
+        this.score = new Score(
+            130,
+            50,
+            0,
+            this.assetStore,
+            this.rendererGroup.plainRenderer,
+        )
     }
 }
