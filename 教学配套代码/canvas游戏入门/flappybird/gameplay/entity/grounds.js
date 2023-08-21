@@ -10,11 +10,16 @@ class Grounds {
         let groundList = []
         const groundNum = 13
         for (let i = 0; i < groundNum; i++) {
-            const position = new Position(x + i * this._groundWidth, y)
-            const ground = new GameObject(position, img)
+            const ground = this._createGround(x + i * this._groundWidth, y, img)
             groundList.push(ground)
         }
         return groundList
+    }
+
+    _createGround(x, y, img) {
+        const position = new Position(x, y)
+        const ground = new GameObject(position, img)
+        return ground
     }
 
     update() {
@@ -32,12 +37,20 @@ class Grounds {
     _addGround() {
         const firstGroundPassedLeftBorder = this._groundList[0].x <= -this._groundWidth
         if (firstGroundPassedLeftBorder) {
-            this._groundList.shift()
-            const lastGround = this._groundList[this._groundList.length - 1]
-            const newLastGroundPosition = new Position(lastGround.x + this._groundWidth, lastGround.y)
-            const newLastGround = new GameObject(newLastGroundPosition, lastGround.img)
-            this._groundList.push(newLastGround)
+            this._removeFirstGround()
+            this._addNewLastGround()
         }
+    }
+
+    _removeFirstGround() {
+        this._groundList.shift()
+    }
+
+    _addNewLastGround() {
+        const lastGround = this._groundList[this._groundList.length - 1]
+        const newLastGroundPosition = new Position(lastGround.x + this._groundWidth, lastGround.y)
+        const newLastGround = new GameObject(newLastGroundPosition, lastGround.img)
+        this._groundList.push(newLastGround)
     }
 
     stop() {
