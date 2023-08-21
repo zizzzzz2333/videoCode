@@ -4,16 +4,14 @@ class GameScene {
         this.assetStore = assetStore
         this.ctx = ctx
 
-        this._createRenderers()
+        this._createRendererGroup()
         this._createEntities()
         this._addEntitiesToContainer()
         this._addEvents()
     }
 
-    _createRenderers() {
-        this.plainRenderer = new PlainRenderer(this.ctx)
-        this.rotateRenderer = new RotateRenderer(this.ctx)
-        this.mixFlipYAndPlainRenderer = new MixFlipYAndPlainRenderer(this.ctx)
+    _createRendererGroup() {
+        this.rendererGroup = new RendererGroup(this.ctx)
     }
 
     _createEntities() {
@@ -32,7 +30,7 @@ class GameScene {
             x: 0,
             y: 0,
             img: this.assetStore.imageByName('bg').img,
-            renderer: this.plainRenderer,
+            renderer: this.rendererGroup.plainRenderer,
         })
     }
 
@@ -40,12 +38,12 @@ class GameScene {
         const birdImg = this.assetStore.imageByName('bird')
         const birdPosition = new Position(100, 50)
         const gameObject = new GameObject(birdPosition, birdImg.img)
-        this.bird = new Bird(gameObject, this.rotateRenderer)
+        this.bird = new Bird(gameObject, this.rendererGroup.rotateRenderer)
     }
 
     _createPipes() {
         const pipeImg = this.assetStore.imageByName('pipe')
-        this.pipes = new Pipes(600, 0, pipeImg.img, this.mixFlipYAndPlainRenderer)
+        this.pipes = new Pipes(600, 0, pipeImg.img, this.rendererGroup.mixFlipYAndPlainRenderer)
 
         this.nextPipeIndex = 0
         this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
@@ -53,7 +51,7 @@ class GameScene {
 
     _createGrounds() {
         const groundImg = this.assetStore.imageByName('ground')
-        this.grounds = new Grounds(0, 440, groundImg.img, this.plainRenderer)
+        this.grounds = new Grounds(0, 440, groundImg.img, this.rendererGroup.plainRenderer)
     }
 
     _createStartMessage() {
@@ -62,7 +60,7 @@ class GameScene {
             x: 50,
             y: 100,
             img: this.assetStore.imageByName('message').img,
-            renderer: this.plainRenderer,
+            renderer: this.rendererGroup.plainRenderer,
         })
     }
 
@@ -72,12 +70,12 @@ class GameScene {
             x: 50,
             y: 190,
             img: this.assetStore.imageByName('gameover').img,
-            renderer: this.plainRenderer,
+            renderer: this.rendererGroup.plainRenderer,
         })
     }
 
     _createScore() {
-        this.score = new Score(130, 50, 0, this.assetStore, this.plainRenderer)
+        this.score = new Score(130, 50, 0, this.assetStore, this.rendererGroup.plainRenderer)
     }
 
     _addEntitiesToContainer() {
