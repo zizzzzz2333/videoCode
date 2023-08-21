@@ -7,6 +7,10 @@ class GameObjectContainer {
         this._gameObjects.push(gameObject)
     }
 
+    addGameObjects(gameObjects) {
+        this._gameObjects = this._gameObjects.concat(gameObjects)
+    }
+
     addGameObjectBefore(gameObject, before) {
         const index = this._gameObjects.indexOf(before)
         const hasBefore = index > -1

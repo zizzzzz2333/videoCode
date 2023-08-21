@@ -4,7 +4,7 @@ class GameScene {
         this.assetStore = game.assetStore
 
         this._createRendererGroup(game.ctx)
-        this._createEntities()
+        this._createEntityGroup()
         this._addEntitiesToContainer()
         this._addEvents()
     }
@@ -13,74 +13,12 @@ class GameScene {
         this.rendererGroup = new RendererGroup(ctx)
     }
 
-    _createEntities() {
-        this._createBackground()
-        this._createBird()
-        this._createPipes()
-        this._createGrounds()
-        this._createStartMessage()
-        this._createGameOver()
-        this._createScore()
-    }
-
-    _createBackground() {
-        this.background = createSingleEntity({
-            entityClass: Background,
-            x: 0,
-            y: 0,
-            img: this.assetStore.imageByName('bg').img,
-            renderer: this.rendererGroup.plainRenderer,
-        })
-    }
-
-    _createBird() {
-        const birdImg = this.assetStore.imageByName('bird')
-        const birdPosition = new Position(100, 50)
-        const gameObject = new GameObject(birdPosition, birdImg.img)
-        this.bird = new Bird(gameObject, this.rendererGroup.rotateRenderer)
-    }
-
-    _createPipes() {
-        const pipeImg = this.assetStore.imageByName('pipe')
-        this.pipes = new Pipes(600, 0, pipeImg.img, this.rendererGroup.mixFlipYAndPlainRenderer)
-
-        this.nextPipeIndex = 0
-        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
-    }
-
-    _createGrounds() {
-        const groundImg = this.assetStore.imageByName('ground')
-        this.grounds = new Grounds(0, 440, groundImg.img, this.rendererGroup.plainRenderer)
-    }
-
-    _createStartMessage() {
-        this.message = createSingleEntity({
-            entityClass: StartMessage,
-            x: 50,
-            y: 100,
-            img: this.assetStore.imageByName('message').img,
-            renderer: this.rendererGroup.plainRenderer,
-        })
-    }
-
-    _createGameOver() {
-        this.gameOver = createSingleEntity({
-            entityClass: GameOverMessage,
-            x: 50,
-            y: 190,
-            img: this.assetStore.imageByName('gameover').img,
-            renderer: this.rendererGroup.plainRenderer,
-        })
-    }
-
-    _createScore() {
-        this.score = new Score(130, 50, 0, this.assetStore, this.rendererGroup.plainRenderer)
+    _createEntityGroup() {
+        this.entityGroup = new EntityGroup(this.assetStore, this.rendererGroup)
     }
 
     _addEntitiesToContainer() {
-        this.container.addGameObject(this.background)
-        this.container.addGameObject(this.grounds)
-        this.container.addGameObject(this.message)
+        this.entityGroup.addEntitiesToContainer(this.container)
     }
 
     _addEvents() {
@@ -94,10 +32,10 @@ class GameScene {
     }
 
     _start() {
-        this.container.addGameObjectBefore(this.pipes, this.grounds)
-        this.container.addGameObject(this.score)
-        this.container.addGameObject(this.bird)
-        this.container.removeGameObject(this.message)
+        this.container.addGameObjectBefore(this.entityGroup.pipes, this.entityGroup.grounds)
+        this.container.addGameObject(this.entityGroup.score)
+        this.container.addGameObject(this.entityGroup.bird)
+        this.container.removeGameObject(this.entityGroup.message)
 
         this._removeEvents()
     }
@@ -115,37 +53,37 @@ class GameScene {
 
     _birdHitGround() {
         const groundHeight = 416
-        if (this.bird.gameObject.y >= groundHeight) {
+        if (this.entityGroup.bird.gameObject.y >= groundHeight) {
             this._stopAll()
         }
     }
 
     _birdHitPipe() {
-        if (hit(this.bird.gameObject, this.pipes.pipeList)) {
+        if (hit(this.entityGroup.bird.gameObject, this.entityGroup.pipes.pipeList)) {
             this._stopAll()
         }
     }
 
     _stopAll() {
-        this.bird.fall()
-        this.grounds.stop()
-        this.pipes.stop()
-        this.container.addGameObject(this.gameOver)
+        this.entityGroup.bird.fall()
+        this.entityGroup.grounds.stop()
+        this.entityGroup.pipes.stop()
+        this.container.addGameObject(this.entityGroup.gameOver)
     }
 
     _increaseScore() {
-        const scoreBar = this.nextPipe.x + this.nextPipe.width
-        const birdCrossedPipe = this.bird.gameObject.x > scoreBar
+        const scoreBar = this.entityGroup.nextPipe.x + this.entityGroup.nextPipe.width
+        const birdCrossedPipe = this.entityGroup.bird.gameObject.x > scoreBar
         if (birdCrossedPipe) {
-            this.score.addOnePoint()
+            this.entityGroup.score.addOnePoint()
             this._reComputeNextPipe()
         }
     }
 
     _reComputeNextPipe() {
         const pairPipeCount = 2
-        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.pipes.count
-        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
+        this.entityGroup.nextPipeIndex = (this.entityGroup.nextPipeIndex + pairPipeCount) % this.entityGroup.pipes.count
+        this.entityGroup.nextPipe = this.entityGroup.pipes.pipeList[this.entityGroup.nextPipeIndex]
     }
 
     render(ctx) {
