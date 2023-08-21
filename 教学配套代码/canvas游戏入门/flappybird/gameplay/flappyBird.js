@@ -44,7 +44,8 @@ const entry = async () => {
     const assetStore = new AssetStore(imgs, imgNames)
 
     const game = new Game(canvas, assetStore)
-    const scene = new GameScene([], game)
+    const container = new GameObjectContainer([])
+    const scene = new GameScene(game, container)
     game.setScene(scene)
     game.runLoop()
 }
