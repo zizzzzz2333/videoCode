@@ -4,25 +4,19 @@ class GameScene {
         this.assetStore = assetStore
         this.ctx = ctx
 
+        this.plainRenderer = new PlainRenderer(this.ctx)
+        this.rotateRenderer = new RotateRenderer(this.ctx)
+        this.mixFlipYAndPlainRenderer = new MixFlipYAndPlainRenderer(this.ctx)
+
         this._createBackground()
         this._createBird()
-
-        // const birdImg = this.assetStore.imageByName('bird')
-        // this.bird = new Bird(100, 50, birdImg.img)
-
-        const pipeImg = this.assetStore.imageByName('pipe')
-        this.pipe = new Pipe(600, 0, pipeImg.img)
-        this.nextPipeIndex = 0
-        this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
+        this._createPipe()
 
         const groundImg = this.assetStore.imageByName('ground')
         this.ground = new Ground(0, 440, groundImg.img)
 
-        const messageImg = this.assetStore.imageByName('message')
-        this.message = new StartMessage(50, 100, messageImg.img)
-
-        const gameOverImg = this.assetStore.imageByName('gameover')
-        this.gameOver = new GameOverMessage(50, 190, gameOverImg.img)
+        this._createStartMessage()
+        this._createGameOver()
 
         this.score = new Score(130, 50, 0, assetStore)
 
@@ -45,8 +39,29 @@ class GameScene {
         const birdImg = this.assetStore.imageByName('bird')
         const birdPosition = new Position(100, 50)
         const gameObject = new GameObjectNew(birdPosition, birdImg.img)
-        const renderer = new RotateRenderer(this.ctx)
-        this.bird = new Bird(gameObject, renderer)
+        this.bird = new Bird(gameObject, this.rotateRenderer)
+    }
+
+    _createPipe() {
+        const pipeImg = this.assetStore.imageByName('pipe')
+        this.pipe = new Pipe(600, 0, pipeImg.img, this.mixFlipYAndPlainRenderer)
+
+        this.nextPipeIndex = 0
+        this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
+    }
+
+    _createStartMessage() {
+        const messageImg = this.assetStore.imageByName('message')
+        const messagePosition = new Position(50, 100)
+        const gameObject = new GameObjectNew(messagePosition, messageImg.img)
+        this.message = new StartMessage(gameObject, this.plainRenderer)
+    }
+
+    _createGameOver() {
+        const gameOverImg = this.assetStore.imageByName('gameover')
+        const gameOverPosition = new Position(50, 190)
+        const gameObject = new GameObjectNew(gameOverPosition, gameOverImg.img)
+        this.gameOver = new GameOverMessage(gameObject, this.plainRenderer)
     }
 
     _start() {

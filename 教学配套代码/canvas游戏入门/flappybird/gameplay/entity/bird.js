@@ -84,7 +84,7 @@ class Bird {
         this._clampMaxHeight()
     }
 
-    render(ctx) {
+    render() {
         this.renderer.render(this.gameObject, this._rotation)
     }
 }

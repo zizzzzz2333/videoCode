@@ -1,8 +1,9 @@
 class Pipe {
-    constructor(x, y, img) {
+    constructor(x, y, img, renderer) {
         this._pipeWidth = img.width
         this._pipeSpeed = 3
         this.pipeList = this._setup(x, y, img)
+        this._renderer = renderer
     }
 
     _setup(x, y, img) {
@@ -24,8 +25,8 @@ class Pipe {
         const randomHeight = [250, 300, 320, 350, 400]
         const pipeHeight = randomHeight[getRandomInt(0, 4)]
         const upperPipeHeight = pipeHeight - 430
-        const pipe = new GameObject(x, pipeHeight, img)
-        const upPipe = new GameObject(x, upperPipeHeight, img)
+        const pipe = new GameObjectNew(new Position(x, pipeHeight), img)
+        const upPipe = new GameObjectNew(new Position(x, upperPipeHeight), img)
         return [pipe, upPipe]
     }
 
@@ -58,13 +59,7 @@ class Pipe {
         this._moveForward()
     }
 
-    render(ctx) {
-        this.pipeList.forEach((gameObject, index) => {
-            if (index % 2 !== 0) {
-                gameObject.render(ctx, true)
-            } else {
-                gameObject.render(ctx)
-            }
-        })
+    render() {
+        this._renderer.render(this.pipeList)
     }
 }

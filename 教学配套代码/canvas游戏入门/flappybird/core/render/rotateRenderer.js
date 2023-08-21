@@ -10,15 +10,16 @@ class RotateRenderer {
         const w = gameObject.width
         const h = gameObject.height
 
-        this.ctx.save()
+        const ctx = this.ctx
+        ctx.save()
 
         let w2 = w / 2
         let h2 = h / 2
-        this.ctx.translate(x + w2, y + h2)
-        this.ctx.rotate(rotation * Math.PI / 180)
-        this.ctx.translate(-w2, -h2)
-        this.ctx.drawImage(img, 0, 0)
+        ctx.translate(x + w2, y + h2)
+        ctx.rotate(rotation * Math.PI / 180)
+        ctx.translate(-w2, -h2)
+        ctx.drawImage(img, 0, 0)
 
-        this.ctx.restore()
+        ctx.restore()
     }
 }

@@ -10,6 +10,7 @@ class FlipYRenderer {
         const w = gameObject.width
         const h = gameObject.height
 
+        const ctx = this.ctx
         ctx.save()
 
         let w2 = w / 2
