@@ -1,9 +1,9 @@
 class Pipes {
     constructor(x, y, img, renderer) {
+        this._renderer = renderer
         this._pipeWidth = img.width
         this._pipeSpeed = 3
         this.pipeList = this._setupPipeList(x, y, img)
-        this._renderer = renderer
 
         this.nextPipeIndex = 0
         this.nextPipe = this.pipeList[this.nextPipeIndex]

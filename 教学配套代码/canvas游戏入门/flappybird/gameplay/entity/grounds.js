@@ -10,7 +10,8 @@ class Grounds {
         let groundList = []
         const groundNum = 13
         for (let i = 0; i < groundNum; i++) {
-            const ground = new GameObject(new Position(x + i * this._groundWidth, y), img)
+            const position = new Position(x + i * this._groundWidth, y)
+            const ground = new GameObject(position, img)
             groundList.push(ground)
         }
         return groundList
@@ -23,7 +24,9 @@ class Grounds {
 
 
     _moveBackward() {
-        this._groundList.forEach((gameObject) => {gameObject.x -= this._groundSpeed})
+        this._groundList.forEach((gameObject) => {
+            gameObject.x -= this._groundSpeed
+        })
     }
 
     _addGround() {
@@ -31,8 +34,9 @@ class Grounds {
         if (firstGroundPassedLeftBorder) {
             this._groundList.shift()
             const lastGround = this._groundList[this._groundList.length - 1]
-            const ground = new GameObject(new Position(lastGround.x + this._groundWidth, lastGround.y), lastGround.img)
-            this._groundList.push(ground)
+            const newLastGroundPosition = new Position(lastGround.x + this._groundWidth, lastGround.y)
+            const newLastGround = new GameObject(newLastGroundPosition, lastGround.img)
+            this._groundList.push(newLastGround)
         }
     }
 
