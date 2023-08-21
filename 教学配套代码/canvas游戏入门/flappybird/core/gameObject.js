@@ -1,23 +1,22 @@
 class GameObject {
-    constructor(x, y, img) {
-        this.x = x
-        this.y = y
+    constructor(position, img) {
+        this.position = position
         this.img = img
         this.width = img.width
         this.height = img.height
     }
 
-    render(ctx, flipY = false, rotation = 0) {
-        ctx.save()
+    get x() {
+        return this.position.x
+    }
+    set x(value) {
+        this.position.x = value
+    }
 
-        let w2 = this.width / 2
-        let h2 = this.height / 2
-        ctx.translate(this.x + w2, this.y + h2)
-        flipY ? ctx.scale(1, -1) : ctx.scale(1, 1)
-        ctx.rotate(rotation * Math.PI / 180)
-        ctx.translate(-w2, -h2)
-        ctx.drawImage(this.img, 0, 0)
-
-        ctx.restore()
+    get y() {
+        return this.position.y
+    }
+    set y(value) {
+        this.position.y = value
     }
 }

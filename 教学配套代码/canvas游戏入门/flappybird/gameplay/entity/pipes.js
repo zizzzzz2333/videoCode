@@ -25,8 +25,8 @@ class Pipes {
         const randomHeight = [250, 300, 320, 350, 400]
         const pipeHeight = randomHeight[getRandomInt(0, 4)]
         const upperPipeHeight = pipeHeight - 430
-        const pipe = new GameObjectNew(new Position(x, pipeHeight), img)
-        const upPipe = new GameObjectNew(new Position(x, upperPipeHeight), img)
+        const pipe = new GameObject(new Position(x, pipeHeight), img)
+        const upPipe = new GameObject(new Position(x, upperPipeHeight), img)
         return [pipe, upPipe]
     }
 

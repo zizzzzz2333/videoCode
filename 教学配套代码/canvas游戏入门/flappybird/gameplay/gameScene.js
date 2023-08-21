@@ -26,7 +26,7 @@ class GameScene {
     _createBackground() {
         const bgImg = this.assetStore.imageByName('bg')
         const bgPosition = new Position(0, 0)
-        const gameObject = new GameObjectNew(bgPosition, bgImg.img)
+        const gameObject = new GameObject(bgPosition, bgImg.img)
         const renderer = new PlainRenderer(this.ctx)
         this.background = new Background(gameObject, renderer)
     }
@@ -34,7 +34,7 @@ class GameScene {
     _createBird() {
         const birdImg = this.assetStore.imageByName('bird')
         const birdPosition = new Position(100, 50)
-        const gameObject = new GameObjectNew(birdPosition, birdImg.img)
+        const gameObject = new GameObject(birdPosition, birdImg.img)
         this.bird = new Bird(gameObject, this.rotateRenderer)
     }
 
@@ -54,14 +54,14 @@ class GameScene {
     _createStartMessage() {
         const messageImg = this.assetStore.imageByName('message')
         const messagePosition = new Position(50, 100)
-        const gameObject = new GameObjectNew(messagePosition, messageImg.img)
+        const gameObject = new GameObject(messagePosition, messageImg.img)
         this.message = new StartMessage(gameObject, this.plainRenderer)
     }
 
     _createGameOver() {
         const gameOverImg = this.assetStore.imageByName('gameover')
         const gameOverPosition = new Position(50, 190)
-        const gameObject = new GameObjectNew(gameOverPosition, gameOverImg.img)
+        const gameObject = new GameObject(gameOverPosition, gameOverImg.img)
         this.gameOver = new GameOverMessage(gameObject, this.plainRenderer)
     }
 

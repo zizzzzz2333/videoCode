@@ -11,7 +11,7 @@ class Score {
     _setup(x, y) {
         let charList = []
         const img = this._assetStore.imageByName('0').img
-        const char = new GameObjectNew(new Position(x, y), img)
+        const char = new GameObject(new Position(x, y), img)
         charList.push(char)
         return charList
     }
@@ -22,7 +22,7 @@ class Score {
         const firstChar = this._charList[0]
         const x = firstChar.x
         const y = firstChar.y
-        return new GameObjectNew(new Position(x + margin, y), img)
+        return new GameObject(new Position(x + margin, y), img)
     }
 
     _adjustMarginForCharOne(char, margin) {
