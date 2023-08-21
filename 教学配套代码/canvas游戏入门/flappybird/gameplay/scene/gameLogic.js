@@ -4,6 +4,14 @@ class GameLogic {
         this.container = container
     }
 
+    addEntitiesToContainer() {
+        this.container.addGameObjects([
+            this.entityGroup.background,
+            this.entityGroup.grounds,
+            this.entityGroup.message
+        ])
+    }
+
     addEvents() {
         document.addEventListener('keydown', this._keydownEventsHandler)
     }

@@ -5,8 +5,8 @@ class GameScene {
 
         this._createRendererGroup(game.ctx)
         this._createEntityGroup()
-        this._addEntitiesToContainer()
         this._createGameLogic()
+        this._addEntitiesToContainer()
         this._addEvents()
     }
 
@@ -18,12 +18,12 @@ class GameScene {
         this.entityGroup = new EntityGroup(this.assetStore, this.rendererGroup)
     }
 
-    _addEntitiesToContainer() {
-        this.entityGroup.addEntitiesToContainer(this.container)
-    }
-
     _createGameLogic() {
         this.gameLogic = new GameLogic(this.entityGroup, this.container)
+    }
+
+    _addEntitiesToContainer() {
+        this.gameLogic.addEntitiesToContainer()
     }
 
     _addEvents() {

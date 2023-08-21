@@ -68,12 +68,4 @@ class EntityGroup {
     _createScore() {
         this.score = new Score(130, 50, 0, this.assetStore, this.rendererGroup.plainRenderer)
     }
-
-    addEntitiesToContainer(container) {
-        container.addGameObjects([
-            this.background,
-            this.grounds,
-            this.message
-        ])
-    }
 }
