@@ -3,12 +3,12 @@ class Score {
         this._charWidth = 24
         this._score = score
         this._assetStore = assetStore
-        this._charList = this._setup(x, y, assetStore)
+        this._charList = this._setupCharList(x, y, assetStore)
         this._initialX = x
         this.renderer = renderer
     }
 
-    _setup(x, y) {
+    _setupCharList(x, y) {
         let charList = []
         const img = this._assetStore.imageByName('0').img
         const char = new GameObject(new Position(x, y), img)
@@ -16,21 +16,27 @@ class Score {
         return charList
     }
 
-    _getCharBasedOnFirstCharPosition(char, margin) {
-        const img = this._assetStore.imageByName(`${char}`).img
-
-        const firstChar = this._charList[0]
-        const x = firstChar.x
-        const y = firstChar.y
-        return new GameObject(new Position(x + margin, y), img)
+    addOnePoint() {
+        this._score += 1
+        this.updateChar(this._score)
     }
 
-    _adjustMarginForCharOne(char, margin) {
-        const paddingForCharOne = 4
-        if (char === '1') {
-            margin += paddingForCharOne
-        }
-        return margin
+    updateChar(score) {
+        const scoreStr = score.toString()
+        this._adjustFirstCharPosition(scoreStr)
+        this._charList = this._generateStr(scoreStr)
+    }
+
+    _adjustFirstCharPosition(scoreStr) {
+        const length = scoreStr.length
+        const offsetCount = (length - 1)
+        const offsetUnit = this._charWidth / 2
+        const offset = offsetCount * offsetUnit
+        this._firstCharMoveLeft(offset)
+    }
+
+    _firstCharMoveLeft(offset) {
+        this._charList[0].x = this._initialX - offset
     }
 
     _generateStr(scoreStr) {
@@ -45,36 +51,29 @@ class Score {
         return charList
     }
 
-    _firstCharMoveLeft(offset) {
-        this._charList[0].x = this._initialX - offset
+    _adjustMarginForCharOne(char, margin) {
+        const paddingForCharOne = 4
+        if (char === '1') {
+            margin += paddingForCharOne
+        }
+        return margin
     }
 
-    _adjustFirstCharPosition(scoreStr) {
-        const length = scoreStr.length
-        const offsetCount = (length - 1)
-        const offsetUnit = this._charWidth / 2
-        const offset = offsetCount * offsetUnit
-        this._firstCharMoveLeft(offset)
-    }
+    _getCharBasedOnFirstCharPosition(char, margin) {
+        const img = this._assetStore.imageByName(`${char}`).img
 
-    updateChar(score) {
-        const scoreStr = score.toString()
-        this._adjustFirstCharPosition(scoreStr)
-        this._charList = this._generateStr(scoreStr)
-    }
-
-    addOnePoint() {
-        this._score += 1
-        this.updateChar(this._score)
+        const firstChar = this._charList[0]
+        const x = firstChar.x
+        const y = firstChar.y
+        return new GameObject(new Position(x + margin, y), img)
     }
 
     update() {
 
     }
 
-    render(ctx) {
+    render() {
         this._charList.forEach((char) => {
-            // char.render(ctx)
             this.renderer.render(char)
         })
     }
