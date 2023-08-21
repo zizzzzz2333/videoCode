@@ -2,11 +2,11 @@ class Pipes {
     constructor(x, y, img, renderer) {
         this._pipeWidth = img.width
         this._pipeSpeed = 3
-        this.pipeList = this._setup(x, y, img)
+        this.pipeList = this._setupPipeList(x, y, img)
         this._renderer = renderer
     }
 
-    _setup(x, y, img) {
+    _setupPipeList(x, y, img) {
         let pipeList = []
         const pipeNum = 4
         const margin = this._pipeWidth * 4
@@ -15,10 +15,6 @@ class Pipes {
             pipeList = pipeList.concat(pipes)
         }
         return pipeList
-    }
-
-    get count() {
-        return this.pipeList.length
     }
 
     _generatePairPipe(x, img) {
@@ -30,8 +26,9 @@ class Pipes {
         return [pipe, upPipe]
     }
 
-    _movePipeToLast(pipe, offset) {
-        pipe.x += offset
+    update() {
+        this._moveBackward()
+        this._moveForward()
     }
 
     _moveForward() {
@@ -46,17 +43,20 @@ class Pipes {
         })
     }
 
+    _movePipeToLast(pipe, offset) {
+        pipe.x += offset
+    }
+
     _moveBackward() {
         this.pipeList.forEach((gameObject) => {gameObject.x -= this._pipeSpeed})
     }
 
-    stop() {
-        this._pipeSpeed = 0
+    get count() {
+        return this.pipeList.length
     }
 
-    update() {
-        this._moveBackward()
-        this._moveForward()
+    stop() {
+        this._pipeSpeed = 0
     }
 
     render() {
