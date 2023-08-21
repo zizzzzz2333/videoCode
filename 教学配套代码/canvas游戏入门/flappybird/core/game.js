@@ -1,7 +1,11 @@
 class Game {
-    constructor(canvas, scene) {
+    constructor(canvas, assetStore) {
         this.canvas = canvas
         this.ctx = this.canvas.getContext("2d");
+        this.assetStore = assetStore
+    }
+
+    setScene(scene) {
         this.scene = scene
     }
 

@@ -1,17 +1,16 @@
 class GameScene {
-    constructor(gameObjects, assetStore, ctx) {
+    constructor(gameObjects, game) {
         this.container = new GameObjectContainer(gameObjects)
-        this.assetStore = assetStore
-        this.ctx = ctx
+        this.assetStore = game.assetStore
 
-        this._createRendererGroup()
+        this._createRendererGroup(game.ctx)
         this._createEntities()
         this._addEntitiesToContainer()
         this._addEvents()
     }
 
-    _createRendererGroup() {
-        this.rendererGroup = new RendererGroup(this.ctx)
+    _createRendererGroup(ctx) {
+        this.rendererGroup = new RendererGroup(ctx)
     }
 
     _createEntities() {

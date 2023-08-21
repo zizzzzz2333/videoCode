@@ -43,11 +43,9 @@ const entry = async () => {
     const imgNames = imgsList.map(img => img.name)
     const assetStore = new AssetStore(imgs, imgNames)
 
-    const ctx = canvas.getContext("2d");
-    const scene = new GameScene([], assetStore, ctx)
-
-    const game = new Game(canvas, scene)
-
+    const game = new Game(canvas, assetStore)
+    const scene = new GameScene([], game)
+    game.setScene(scene)
     game.runLoop()
 }
 entry()
