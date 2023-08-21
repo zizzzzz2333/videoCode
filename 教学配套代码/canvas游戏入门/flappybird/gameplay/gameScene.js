@@ -24,11 +24,13 @@ class GameScene {
     }
 
     _createBackground() {
-        const bgImg = this.assetStore.imageByName('bg')
-        const bgPosition = new Position(0, 0)
-        const gameObject = new GameObject(bgPosition, bgImg.img)
-        const renderer = new PlainRenderer(this.ctx)
-        this.background = new Background(gameObject, renderer)
+        this.background = createSingleEntity({
+            entityClass: Background,
+            x: 0,
+            y: 0,
+            img: this.assetStore.imageByName('bg').img,
+            renderer: this.plainRenderer,
+        })
     }
 
     _createBird() {
@@ -52,17 +54,23 @@ class GameScene {
     }
 
     _createStartMessage() {
-        const messageImg = this.assetStore.imageByName('message')
-        const messagePosition = new Position(50, 100)
-        const gameObject = new GameObject(messagePosition, messageImg.img)
-        this.message = new StartMessage(gameObject, this.plainRenderer)
+        this.message = createSingleEntity({
+            entityClass: StartMessage,
+            x: 50,
+            y: 100,
+            img: this.assetStore.imageByName('message').img,
+            renderer: this.plainRenderer,
+        })
     }
 
     _createGameOver() {
-        const gameOverImg = this.assetStore.imageByName('gameover')
-        const gameOverPosition = new Position(50, 190)
-        const gameObject = new GameObject(gameOverPosition, gameOverImg.img)
-        this.gameOver = new GameOverMessage(gameObject, this.plainRenderer)
+        this.gameOver = createSingleEntity({
+            entityClass: GameOverMessage,
+            x: 50,
+            y: 190,
+            img: this.assetStore.imageByName('gameover').img,
+            renderer: this.plainRenderer,
+        })
     }
 
     _createScore() {
