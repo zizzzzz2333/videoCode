@@ -16,8 +16,7 @@ class GameLogic {
 
     _start() {
         this.container.addGameObjectBefore(this.entityGroup.pipes, this.entityGroup.grounds)
-        this.container.addGameObject(this.entityGroup.score)
-        this.container.addGameObject(this.entityGroup.bird)
+        this.container.addGameObjects([this.entityGroup.score, this.entityGroup.bird])
         this.container.removeGameObject(this.entityGroup.message)
 
         this._removeEvents()
