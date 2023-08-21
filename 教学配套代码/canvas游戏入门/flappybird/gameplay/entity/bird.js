@@ -1,6 +1,8 @@
 class Bird {
-    constructor(x, y, img) {
-        this.gameObject = new GameObject(x, y, img)
+    constructor(gameObject, renderer) {
+        this.gameObject = gameObject
+        this.renderer = renderer
+
         this._ySpeed = 0
         this._maxYSpeed = 15
         this._jumpSpeed = -7
@@ -83,6 +85,6 @@ class Bird {
     }
 
     render(ctx) {
-        this.gameObject.render(ctx, false, this._rotation)
+        this.renderer.render(this.gameObject, this._rotation)
     }
 }

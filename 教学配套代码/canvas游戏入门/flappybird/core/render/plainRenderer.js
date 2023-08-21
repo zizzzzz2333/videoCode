@@ -4,8 +4,8 @@ class PlainRenderer {
     }
 
     render(gameObject) {
-        const x = gameObject.position.x
-        const y = gameObject.position.y
+        const x = gameObject.x
+        const y = gameObject.y
         const img = gameObject.img
         this.ctx.drawImage(img, x, y)
     }

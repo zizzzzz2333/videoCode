@@ -1,8 +1,8 @@
 const singleHit = (a, b) => {
-    return a.x + a.w >= b.x &&
-        a.x <= b.x + b.w &&
-        a.y + a.h >= b.y &&
-        a.y <= b.y + b.h;
+    return a.x + a.width >= b.x &&
+        a.x <= b.x + b.width &&
+        a.y + a.height >= b.y &&
+        a.y <= b.y + b.height;
 }
 
 const singleHitMultiple = (a, bs) => {

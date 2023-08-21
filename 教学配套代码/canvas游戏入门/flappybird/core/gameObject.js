@@ -3,15 +3,15 @@ class GameObject {
         this.x = x
         this.y = y
         this.img = img
-        this.w = img.width
-        this.h = img.height
+        this.width = img.width
+        this.height = img.height
     }
 
     render(ctx, flipY = false, rotation = 0) {
         ctx.save()
 
-        let w2 = this.w / 2
-        let h2 = this.h / 2
+        let w2 = this.width / 2
+        let h2 = this.height / 2
         ctx.translate(this.x + w2, this.y + h2)
         flipY ? ctx.scale(1, -1) : ctx.scale(1, 1)
         ctx.rotate(rotation * Math.PI / 180)

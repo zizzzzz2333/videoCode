@@ -5,9 +5,10 @@ class GameScene {
         this.ctx = ctx
 
         this._createBackground()
+        this._createBird()
 
-        const birdImg = this.assetStore.imageByName('bird')
-        this.bird = new Bird(100, 50, birdImg.img)
+        // const birdImg = this.assetStore.imageByName('bird')
+        // this.bird = new Bird(100, 50, birdImg.img)
 
         const pipeImg = this.assetStore.imageByName('pipe')
         this.pipe = new Pipe(600, 0, pipeImg.img)
@@ -38,6 +39,14 @@ class GameScene {
         const gameObject = new GameObjectNew(bgPosition, bgImg.img)
         const renderer = new PlainRenderer(this.ctx)
         this.background = new Background(gameObject, renderer)
+    }
+
+    _createBird() {
+        const birdImg = this.assetStore.imageByName('bird')
+        const birdPosition = new Position(100, 50)
+        const gameObject = new GameObjectNew(birdPosition, birdImg.img)
+        const renderer = new RotateRenderer(this.ctx)
+        this.bird = new Bird(gameObject, renderer)
     }
 
     _start() {
