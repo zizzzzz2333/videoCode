@@ -4,11 +4,12 @@ class FlipYRenderer {
     }
 
     render(gameObject) {
-        const x = gameObject.x
-        const y = gameObject.y
-        const img = gameObject.img
-        const w = gameObject.width
-        const h = gameObject.height
+        const o = gameObject
+        const x = o.x
+        const y = o.y
+        const img = o.img
+        const w = o.width
+        const h = o.height
 
         const ctx = this.ctx
         ctx.save()
