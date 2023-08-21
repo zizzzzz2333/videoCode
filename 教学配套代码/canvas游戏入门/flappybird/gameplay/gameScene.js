@@ -4,10 +4,19 @@ class GameScene {
         this.assetStore = assetStore
         this.ctx = ctx
 
+        this._createRenderers()
+        this._createEntities()
+        this._addEntitiesToContainer()
+        this._addEvents()
+    }
+
+    _createRenderers() {
         this.plainRenderer = new PlainRenderer(this.ctx)
         this.rotateRenderer = new RotateRenderer(this.ctx)
         this.mixFlipYAndPlainRenderer = new MixFlipYAndPlainRenderer(this.ctx)
+    }
 
+    _createEntities() {
         this._createBackground()
         this._createBird()
         this._createPipes()
@@ -15,12 +24,6 @@ class GameScene {
         this._createStartMessage()
         this._createGameOver()
         this._createScore()
-
-        this.container.addGameObject(this.background)
-        this.container.addGameObject(this.grounds)
-        this.container.addGameObject(this.message)
-
-        this._addEvents()
     }
 
     _createBackground() {
@@ -77,6 +80,22 @@ class GameScene {
         this.score = new Score(130, 50, 0, this.assetStore, this.plainRenderer)
     }
 
+    _addEntitiesToContainer() {
+        this.container.addGameObject(this.background)
+        this.container.addGameObject(this.grounds)
+        this.container.addGameObject(this.message)
+    }
+
+    _addEvents() {
+        document.addEventListener('keydown', this._keydownEventsHandler)
+    }
+
+    _keydownEventsHandler = (event) => {
+        if(event.key === 'j')  {
+            this._start()
+        }
+    }
+
     _start() {
         this.container.addGameObjectBefore(this.pipes, this.grounds)
         this.container.addGameObject(this.score)
@@ -86,18 +105,8 @@ class GameScene {
         this._removeEvents()
     }
 
-    _keydownEventsHandler = (event) => {
-        if(event.key === 'j')  {
-            this._start()
-        }
-    }
-
     _removeEvents() {
         document.removeEventListener('keydown', this._keydownEventsHandler)
-    }
-
-    _addEvents() {
-        document.addEventListener('keydown', this._keydownEventsHandler)
     }
 
     _stopAll() {
