@@ -9,6 +9,12 @@ class Game {
         this.scene = scene
     }
 
+    runLoop() {
+        this.update()
+        this.render()
+        requestAnimationFrame(this.runLoop.bind(this))
+    }
+
     update() {
         this.scene.update()
     }
@@ -16,11 +22,5 @@ class Game {
     render() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.scene.render()
-    }
-
-    runLoop() {
-        this.update()
-        this.render()
-        requestAnimationFrame(this.runLoop.bind(this))
     }
 }
