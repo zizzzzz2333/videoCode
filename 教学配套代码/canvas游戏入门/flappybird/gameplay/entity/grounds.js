@@ -2,11 +2,11 @@ class Grounds {
     constructor(x, y, img, renderer) {
         this._groundWidth = img.width
         this._groundSpeed = 3
-        this._groundList = this._setup(x, y, img)
+        this._groundList = this._setupGroundList(x, y, img)
         this._renderer = renderer
     }
 
-    _setup(x, y, img) {
+    _setupGroundList(x, y, img) {
         let groundList = []
         const groundNum = 13
         for (let i = 0; i < groundNum; i++) {
@@ -15,6 +15,12 @@ class Grounds {
         }
         return groundList
     }
+
+    update() {
+        this._moveBackward()
+        this._addGround()
+    }
+
 
     _moveBackward() {
         this._groundList.forEach((gameObject) => {gameObject.x -= this._groundSpeed})
@@ -32,11 +38,6 @@ class Grounds {
 
     stop() {
         this._groundSpeed = 0
-    }
-
-    update() {
-        this._moveBackward()
-        this._addGround()
     }
 
     render(ctx) {

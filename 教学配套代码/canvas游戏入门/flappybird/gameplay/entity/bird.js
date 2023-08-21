@@ -17,6 +17,11 @@ class Bird {
         this._addEvents()
     }
 
+    _addEvents() {
+        document.addEventListener('keydown', this._keydownEventsHandler)
+        document.addEventListener('keyup', this._keyupEventsHandler)
+    }
+
     _keydownEventsHandler = (event) => {
         if(event.key === 'j')  {
             this._moveUp = true
@@ -29,9 +34,12 @@ class Bird {
         }
     }
 
-    _addEvents() {
-        document.addEventListener('keydown', this._keydownEventsHandler)
-        document.addEventListener('keyup', this._keyupEventsHandler)
+    update() {
+        this._jump()
+        this._updateYSpeed()
+        this._updateRotation()
+        this._checkOnGround()
+        this._clampMaxHeight()
     }
 
     _jump() {
@@ -41,15 +49,15 @@ class Bird {
         }
     }
 
-    _updateRotation() {
-        if (this._rotation < this._maxRotation) {
-            this._rotation += this._rotationDelta
-        }
-    }
-
     _updateYSpeed() {
         if (this._ySpeed < this._maxYSpeed) {
             this._ySpeed += this._ySpeedDelta
+        }
+    }
+
+    _updateRotation() {
+        if (this._rotation < this._maxRotation) {
+            this._rotation += this._rotationDelta
         }
     }
 
@@ -74,14 +82,6 @@ class Bird {
         this._moveUp = false
         document.removeEventListener('keydown', this._keydownEventsHandler)
         document.removeEventListener('keyup', this._keyupEventsHandler)
-    }
-
-    update() {
-        this._jump()
-        this._updateYSpeed()
-        this._updateRotation()
-        this._checkOnGround()
-        this._clampMaxHeight()
     }
 
     render() {
