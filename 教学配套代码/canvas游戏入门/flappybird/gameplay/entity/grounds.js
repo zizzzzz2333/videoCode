@@ -1,4 +1,4 @@
-class Ground {
+class Grounds {
     constructor(x, y, img, renderer) {
         this._groundWidth = img.width
         this._groundSpeed = 3

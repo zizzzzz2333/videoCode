@@ -1,4 +1,4 @@
-class Pipe {
+class Pipes {
     constructor(x, y, img, renderer) {
         this._pipeWidth = img.width
         this._pipeSpeed = 3

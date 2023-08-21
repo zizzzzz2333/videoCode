@@ -10,19 +10,15 @@ class GameScene {
 
         this._createBackground()
         this._createBird()
-        this._createPipe()
-        this._createGround()
-
-        // const groundImg = this.assetStore.imageByName('ground')
-        // this.ground = new Ground(0, 440, groundImg.img)
-
+        this._createPipes()
+        this._createGrounds()
         this._createStartMessage()
         this._createGameOver()
 
         this.score = new Score(130, 50, 0, assetStore)
 
         this.container.addGameObject(this.background)
-        this.container.addGameObject(this.ground)
+        this.container.addGameObject(this.grounds)
         this.container.addGameObject(this.message)
 
         this._addEvents()
@@ -43,17 +39,17 @@ class GameScene {
         this.bird = new Bird(gameObject, this.rotateRenderer)
     }
 
-    _createPipe() {
+    _createPipes() {
         const pipeImg = this.assetStore.imageByName('pipe')
-        this.pipe = new Pipe(600, 0, pipeImg.img, this.mixFlipYAndPlainRenderer)
+        this.pipes = new Pipes(600, 0, pipeImg.img, this.mixFlipYAndPlainRenderer)
 
         this.nextPipeIndex = 0
-        this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
+        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
     }
 
-    _createGround() {
+    _createGrounds() {
         const groundImg = this.assetStore.imageByName('ground')
-        this.ground = new Ground(0, 440, groundImg.img, this.plainRenderer)
+        this.grounds = new Grounds(0, 440, groundImg.img, this.plainRenderer)
     }
 
     _createStartMessage() {
@@ -71,7 +67,7 @@ class GameScene {
     }
 
     _start() {
-        this.container.addGameObjectBefore(this.pipe, this.ground)
+        this.container.addGameObjectBefore(this.pipes, this.grounds)
         this.container.addGameObject(this.score)
         this.container.addGameObject(this.bird)
         this.container.removeGameObject(this.message)
@@ -95,8 +91,8 @@ class GameScene {
 
     _stopAll() {
         this.bird.fall()
-        this.ground.stop()
-        this.pipe.stop()
+        this.grounds.stop()
+        this.pipes.stop()
         this.container.addGameObject(this.gameOver)
     }
 
@@ -108,15 +104,15 @@ class GameScene {
     }
 
     _birdHitPipe() {
-        if (hit(this.bird.gameObject, this.pipe.pipeList)) {
+        if (hit(this.bird.gameObject, this.pipes.pipeList)) {
             this._stopAll()
         }
     }
 
     _reComputeNextPipe() {
         const pairPipeCount = 2
-        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.pipe.count
-        this.nextPipe = this.pipe.pipeList[this.nextPipeIndex]
+        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.pipes.count
+        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
     }
 
     _increaseScore() {
