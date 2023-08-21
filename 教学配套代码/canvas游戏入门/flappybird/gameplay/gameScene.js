@@ -109,11 +109,11 @@ class GameScene {
         document.removeEventListener('keydown', this._keydownEventsHandler)
     }
 
-    _stopAll() {
-        this.bird.fall()
-        this.grounds.stop()
-        this.pipes.stop()
-        this.container.addGameObject(this.gameOver)
+    update() {
+        this.container.update()
+        this._birdHitGround()
+        this._birdHitPipe()
+        this._increaseScore()
     }
 
     _birdHitGround() {
@@ -129,10 +129,11 @@ class GameScene {
         }
     }
 
-    _reComputeNextPipe() {
-        const pairPipeCount = 2
-        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.pipes.count
-        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
+    _stopAll() {
+        this.bird.fall()
+        this.grounds.stop()
+        this.pipes.stop()
+        this.container.addGameObject(this.gameOver)
     }
 
     _increaseScore() {
@@ -144,11 +145,10 @@ class GameScene {
         }
     }
 
-    update() {
-        this.container.update()
-        this._birdHitGround()
-        this._birdHitPipe()
-        this._increaseScore()
+    _reComputeNextPipe() {
+        const pairPipeCount = 2
+        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.pipes.count
+        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
     }
 
     render(ctx) {
