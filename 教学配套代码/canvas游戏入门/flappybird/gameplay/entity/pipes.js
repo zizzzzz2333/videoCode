@@ -68,6 +68,10 @@ class Pipes {
         this.nextPipe = this.pipeList[this.nextPipeIndex]
     }
 
+    get scoreBar() {
+        return this.nextPipe.x + this.nextPipe.width
+    }
+
     render() {
         this._renderer.render(this.pipeList)
     }

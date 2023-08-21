@@ -15,9 +15,10 @@ class GameLogic {
     }
 
     _start() {
-        this.container.addGameObjectBefore(this.entityGroup.pipes, this.entityGroup.grounds)
-        this.container.addGameObjects([this.entityGroup.score, this.entityGroup.bird])
-        this.container.removeGameObject(this.entityGroup.message)
+        const group = this.entityGroup
+        this.container.addGameObjectBefore(group.pipes, group.grounds)
+        this.container.addGameObjects([group.score, group.bird])
+        this.container.removeGameObject(group.message)
 
         this._removeEvents()
     }
@@ -35,7 +36,8 @@ class GameLogic {
 
     _birdHitGround() {
         const groundHeight = 416
-        if (this.entityGroup.bird.gameObject.y >= groundHeight) {
+        const birdHitGround = this.entityGroup.bird.gameObject.y >= groundHeight
+        if (birdHitGround) {
             this._stopAll()
         }
     }
@@ -54,7 +56,7 @@ class GameLogic {
     }
 
     _increaseScore() {
-        const scoreBar = this.entityGroup.pipes.nextPipe.x + this.entityGroup.pipes.nextPipe.width
+        const scoreBar = this.entityGroup.pipes.scoreBar
         const birdCrossedPipe = this.entityGroup.bird.gameObject.x > scoreBar
         if (birdCrossedPipe) {
             this.entityGroup.score.addOnePoint()
