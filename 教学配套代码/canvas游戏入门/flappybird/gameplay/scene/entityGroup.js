@@ -26,10 +26,13 @@ class EntityGroup {
     }
 
     _createBird() {
-        const birdImg = this.assetStore.imageByName('bird')
-        const birdPosition = new Position(100, 50)
-        const gameObject = new GameObject(birdPosition, birdImg.img)
-        this.bird = new Bird(gameObject, this.rendererGroup.rotateRenderer)
+        this.bird = createSingleEntity({
+            entityClass: Bird,
+            x: 100,
+            y: 50,
+            img: this.assetStore.imageByName('bird').img,
+            renderer: this.rendererGroup.rotateRenderer,
+        })
     }
 
     _createPipes() {
