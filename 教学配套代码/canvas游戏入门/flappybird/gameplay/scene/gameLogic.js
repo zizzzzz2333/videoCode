@@ -4,14 +4,14 @@ class GameLogic {
         this.container = container
     }
 
+    addEvents() {
+        document.addEventListener('keydown', this._keydownEventsHandler)
+    }
+
     _keydownEventsHandler = (event) => {
         if(event.key === 'j')  {
             this._start()
         }
-    }
-
-    addEvents() {
-        document.addEventListener('keydown', this._keydownEventsHandler)
     }
 
     _start() {
