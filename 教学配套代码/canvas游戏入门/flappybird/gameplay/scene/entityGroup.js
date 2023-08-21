@@ -38,9 +38,6 @@ class EntityGroup {
     _createPipes() {
         const pipeImg = this.assetStore.imageByName('pipe')
         this.pipes = new Pipes(600, 0, pipeImg.img, this.rendererGroup.mixFlipYAndPlainRenderer)
-
-        this.nextPipeIndex = 0
-        this.nextPipe = this.pipes.pipeList[this.nextPipeIndex]
     }
 
     _createGrounds() {

@@ -4,6 +4,9 @@ class Pipes {
         this._pipeSpeed = 3
         this.pipeList = this._setupPipeList(x, y, img)
         this._renderer = renderer
+
+        this.nextPipeIndex = 0
+        this.nextPipe = this.pipeList[this.nextPipeIndex]
     }
 
     _setupPipeList(x, y, img) {
@@ -57,6 +60,12 @@ class Pipes {
 
     stop() {
         this._pipeSpeed = 0
+    }
+
+    reComputeNextPipe() {
+        const pairPipeCount = 2
+        this.nextPipeIndex = (this.nextPipeIndex + pairPipeCount) % this.count
+        this.nextPipe = this.pipeList[this.nextPipeIndex]
     }
 
     render() {

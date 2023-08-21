@@ -55,18 +55,12 @@ class GameLogic {
     }
 
     _increaseScore() {
-        const scoreBar = this.entityGroup.nextPipe.x + this.entityGroup.nextPipe.width
+        const scoreBar = this.entityGroup.pipes.nextPipe.x + this.entityGroup.pipes.nextPipe.width
         const birdCrossedPipe = this.entityGroup.bird.gameObject.x > scoreBar
         if (birdCrossedPipe) {
             this.entityGroup.score.addOnePoint()
-            this._reComputeNextPipe()
+            this.entityGroup.pipes.reComputeNextPipe()
         }
-    }
-
-    _reComputeNextPipe() {
-        const pairPipeCount = 2
-        this.entityGroup.nextPipeIndex = (this.entityGroup.nextPipeIndex + pairPipeCount) % this.entityGroup.pipes.count
-        this.entityGroup.nextPipe = this.entityGroup.pipes.pipeList[this.entityGroup.nextPipeIndex]
     }
 
     render() {
